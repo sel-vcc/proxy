@@ -16,9 +16,9 @@ push:
 # Build istio-proxy (including envoy) inside the docker container
 build-istio:
 	cd $(TOP) && docker run -it --rm -it \
-       -v $(PWD):$(TOP) -w $(TOP) \
-       -v /tmp/istio-build:/home/circleci \
        --name $(IMG) \
+       -v $(PWD):$(TOP):delegated -w $(TOP) \
+       -v /tmp/istio-build:/home/circleci:delegated \
        -e USER=$(USER) \
        -e BAZEL_BUILD_ARGS="--local_resources=12288,5,1" \
        -e BAZEL_TEST_ARGS="--test_env=ENVOY_IP_TEST_VERSIONS=v4only --test_output=all --local_resources=12288,5,1 --local_test_jobs=8" \
