@@ -38,23 +38,23 @@ bind(
 # When updating envoy sha manually please update the sha in istio.deps file also
 #
 # Determine SHA256 `wget https://github.com/envoyproxy/envoy/archive/COMMIT.tar.gz && sha256sum COMMIT.tar.gz`
-ENVOY_SHA = "52a04b6c55b7f6d5646c0fb235ce403394f67839"
-ENVOY_SHA256 = "101b2401ee702d2a13e6232a51d5ad16caea30654b726e29ad847480845e6552"
+ENVOY_SHA = "aeba24018d759585fbcea02a2285126e33f1a798"
+ENVOY_SHA256 = "6a767d3c506e0ab26f34ecc5e226912cad877fa3c25320a9c3cbc237af615077"
 LOCAL_ENVOY_PROJECT = "/PATH/TO/ENVOY"
 
 http_archive(
     name = "envoy",
     strip_prefix = "envoy-" + ENVOY_SHA,
-    url = "https://github.com/istio/envoy/archive/" + ENVOY_SHA + ".tar.gz",
+    url = "https://github.com/sel-vcc/envoy/archive/" + ENVOY_SHA + ".tar.gz",
     sha256 = ENVOY_SHA256,
 )
 
 # TODO(silentdai) Use bazel args to select envoy between local or http
 # Uncomment below and comment above http_archive to depends on local envoy.
-#local_repository(
+# local_repository(
 #     name = "envoy",
-#     path = LOCAL_ENVOY_PROJECT,
-#)
+#     path = "/home/ubuntu/src/github.com/sel-vcc/envoy",
+# )
 
 load("@envoy//bazel:api_repositories.bzl", "envoy_api_dependencies")
 envoy_api_dependencies()
